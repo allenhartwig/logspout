@@ -11,7 +11,7 @@ import (
 	"reflect"
 	"text/template"
 	"time"
-
+        "strings"
 	"github.com/gliderlabs/logspout/router"
 )
 
@@ -142,5 +142,15 @@ func (m *SyslogMessage) Timestamp() string {
 }
 
 func (m *SyslogMessage) TagName() string {
+	if val, ok := m.Message.Container.Config.Labels["io.rancher.stack_service.name"]; ok {
+		s := strings.Split(val, "/")
+    		one, two := s[0], s[1]
+		return two
+	}
+	if val, ok := m.Message.Container.Config.Labels["io.rancher.project_service.name"]; ok {
+		s := strings.Split(val, "/")
+    		one, two := s[0], s[1]
+		return two
+	}
 	return m.Message.Container.Name[1:]
 }
