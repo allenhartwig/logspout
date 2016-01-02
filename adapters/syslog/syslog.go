@@ -142,8 +142,5 @@ func (m *SyslogMessage) Timestamp() string {
 }
 
 func (m *SyslogMessage) TagName() string {
-	if val := m.Message.Container.Config.Hostname; len(val) > 0 {
-		return val
-	}
-	return hostname
+	return m.Message.Container.Name[1:]
 }
