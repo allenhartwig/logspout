@@ -144,13 +144,13 @@ func (m *SyslogMessage) Timestamp() string {
 func (m *SyslogMessage) TagName() string {
 	if val, ok := m.Message.Container.Config.Labels["io.rancher.stack_service.name"]; ok {
 		s := strings.Split(val, "/")
-    		abc, def := s[0], s[1]
-		return def
+    		_, two := s[0], s[1]
+		return two
 	}
 	if val, ok := m.Message.Container.Config.Labels["io.rancher.project_service.name"]; ok {
 		z := strings.Split(val, "/")
-    		gty, gfc := z[0], z[1]
-		return gfc
+    		_, two := z[0], z[1]
+		return two
 	}
 	return m.Message.Container.Name[1:]
 }
