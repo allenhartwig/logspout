@@ -129,10 +129,14 @@ func (m *SyslogMessage) Priority() syslog.Priority {
 
 func (m *SyslogMessage) Hostname() string {
 	if val, ok := m.Message.Container.Config.Labels["io.rancher.stack_service.name"]; ok {
-		return val
+		s := strings.Split(val, "/")
+    		one, _ := s[0], s[1]
+		return one
 	}
 	if val, ok := m.Message.Container.Config.Labels["io.rancher.project_service.name"]; ok {
-		return val
+		s := strings.Split(val, "/")
+    		one, _ := s[0], s[1]
+		return one
 	}
 	return m.Message.Container.Name[1:]
 }
